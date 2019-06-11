@@ -5,20 +5,28 @@ import './books.css';
 
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
+    const printTime = () => {
+        let dt = new Date();
+        const time = `${dt.getHours()} : ${dt.getMinutes()} : ${dt.getSeconds()} : ${dt.getMilliseconds()}}`;
+        console.log('time -> ', time);
+    };
     const scrollHandler = (event) => {
-        console.log('onscroll....')
         const element = event.target;
         const percentage = (element.scrollTop /  (element.scrollHeight - element.clientHeight))*100;
         if(percentage === 100) {
-            // console.log('fetch now...'+Date.now());
-            timerId = setTimeout(fetchBooks, 1000);
+            clearTimeout(timerId);
+            fetchBooks();
         }
     };
     const fetchBooks = () => {
-        // console.log('get data...');
-        clearTimeout(timerId);
-        props.fetchBooks(props.offset+1);
+        printTime();
+        timerId = setTimeout(getBooks, 500);
     };
+
+    const getBooks = () => {
+        props.fetchBooks(props.offset+1);
+    }
+    
     const bookCollection =  props.books.map((item, index) => {
         const editLink=`/edit/${item._id}`
         return (

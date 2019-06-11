@@ -22,7 +22,9 @@ class Home extends React.Component {
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     // (snapshot here is the value returned from getSnapshotBeforeUpdate)
+    // console.log('componentDidUpdate...');
     if (snapshot !== null) {
+      console.log('componentDidUpdate...');
       const list = this.scrollRef.current;
       list.scrollTop = list.scrollHeight - snapshot - 50;
     }
