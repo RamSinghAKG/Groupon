@@ -1,0 +1,20 @@
+ .search-container{
+    flex-grow: 4;
+    display:flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  .search-container input[type=text] {
+    padding: 6px 5px;
+    font-size: 17px;
+    border: none;
+    width:80%;
+  }
+  
+ .search-container button {
+    padding: 6px 10px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }

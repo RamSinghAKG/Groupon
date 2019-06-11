@@ -1,0 +1,41 @@
+.book-container{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    position: relative;
+}
+.book-info{
+    flex-grow: 1;
+    padding: 5px;
+    width: 80%;
+}
+.book-info div{
+    margin: 5px auto;
+    text-transform: capitalize;
+}
+.book-info div:nth-child(1){
+    font-weight: bold;
+}
+.book-info div:nth-child(3){
+    color: red;
+    font-weight: bold;
+}
+.book-edit{
+    flex-grow: 1;
+    background-color: #2196F3;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+}
+.book-edit:hover{
+    cursor: pointer;
+}
+.scrollableSection{
+    height: 500px;
+    overflow: scroll;
+}
