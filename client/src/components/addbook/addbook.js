@@ -18,7 +18,7 @@ const AddBook = (props) => {
     }
     const update = () => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
-        isDataValid && props.updateBook(props.book);
+        isDataValid && props.updateBook(props.book, props.history);
     }
     const fetchBookInfo = () => {
         console.log('fetchBookInfo...');

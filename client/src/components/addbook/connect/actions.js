@@ -81,7 +81,7 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
     }
 };
 
-export  const updateBook =  (bookInfo={}) => async (dispatch) => {
+export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
     try {
         let url = config.apiserver + '/library/book/update';
         let options = {
@@ -94,6 +94,7 @@ export  const updateBook =  (bookInfo={}) => async (dispatch) => {
         let response = await fetch(url, options);
         if(response.status === 200) {
             let booksInfo = await response.json();
+            history.goBack();
             return dispatch({
                 type: UPDATE_BOOK_SUCCESS,
                 payload: booksInfo

@@ -65,7 +65,7 @@ async function saveBookInfo(res, data) {
 async function updateBookDetail(req, res) {
   try {
     const book = req.body.book;
-    await Book.update({name: book.name}, {
+    await Book.updateOne({name: book.name}, {
       name: book.name,
       price: book.price,
       author: book.author,
