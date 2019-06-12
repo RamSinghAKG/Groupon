@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('../model/Book');
 const Book = mongoose.model('Book');
 
+
 router.get('/books/:offset', function (req, res, next) {
   getBooks(req, res);
 });
@@ -23,7 +24,17 @@ router.post('/create', function (req, res, next) {
   };
   saveBookInfo(res, bookObj);
 });
+router.get('/search/:query', async function (req, res, next) {
+  try {
+    
+    let bookInfo = await Book.find({$text:{$search: req.params.query}});
 
+    res.send(bookInfo);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 async function getBooks(req, res) {
   try {
     const offset = req.params.offset;

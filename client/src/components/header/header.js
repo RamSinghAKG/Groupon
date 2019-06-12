@@ -6,7 +6,7 @@ import Search from '../UI/search';
 import { ErrorBoundary } from '../errorboundary/errorboundary';
 export const Header = (props) => {
     const customHeader = props.isNormalHeader ? '' : (
-        <React.Fragment><Search></Search>
+        <React.Fragment><Search getSearch={props.getSearch}></Search>
             <Link to="/create">Add Book</Link></React.Fragment>);
     return (
         <ErrorBoundary>
@@ -21,5 +21,6 @@ export const Header = (props) => {
 
 Header.propTypes = {
     isNormalHeader: PropTypes.bool,
-    error: PropTypes.string
+    error: PropTypes.string,
+    getSearch: PropTypes.func
 };

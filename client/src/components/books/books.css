@@ -39,3 +39,8 @@
     height: 500px;
     overflow: scroll;
 }
+.norecord{
+    color: blue;
+    text-align: center;
+    margin-top: 100px;
+  }

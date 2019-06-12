@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './books.css';
 import { ErrorBoundary } from './../errorboundary/errorboundary';
-
+import {printTime} from '../../util';
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
-    const printTime = () => {
-        let dt = new Date();
-        const time = `${dt.getHours()} : ${dt.getMinutes()} : ${dt.getSeconds()} : ${dt.getMilliseconds()}}`;
-        console.log('time -> ', time);
-    };
+    
     const scrollHandler = (event) => {
         const element = event.target;
         const percentage = (element.scrollTop /  (element.scrollHeight - element.clientHeight))*100;
@@ -41,11 +37,12 @@ const Books = React.forwardRef((props, ref) => {
             </div>
         );
     });
+    const norecord = <h4 className="norecord">No matching books found...</h4>;
+    
     return (
         <ErrorBoundary>
-            <div className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)}> {bookCollection}</div>
+            <div className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)}> {props.books.length === 0 ? norecord : bookCollection} </div>
         </ErrorBoundary>);
-    
 });
 
 Books.propTypes = {

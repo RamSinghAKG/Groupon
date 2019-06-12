@@ -30,7 +30,7 @@ class Home extends React.Component {
   render() {
     return (
       <ErrorBoundary>
-        <Header error={this.props.error}></Header>
+        <Header getSearch={this.props.getSearch} error={this.props.error}></Header>
         <Books books={this.props.books} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
       </ErrorBoundary>
     );
@@ -39,7 +39,8 @@ class Home extends React.Component {
 Home.propTypes = {
   books: PropTypes.array,
   offset: PropTypes.number,
-  fetchBooks: PropTypes.func
+  fetchBooks: PropTypes.func,
+  getSearch: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -51,7 +52,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchBooks: actions.fetchBooks
+    fetchBooks: actions.fetchBooks,
+    getSearch: actions.getSearch
   }, dispatch);
 };
 

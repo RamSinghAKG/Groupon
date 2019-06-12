@@ -1,24 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './search.css';
 import { ErrorBoundary } from '../../errorboundary/errorboundary';
-const Search = () => {
+const Search = (props) => {
   const searchRef = React.createRef();
+  let timerId = 0;
   const onSearch = () => {
-      const query = searchRef.current.value;
-      getSearchInfo(query);
+    clearTimeout(timerId);
+    timerId = setTimeout(() => getSearchInfo(), 500);
   };
-  const getSearchInfo = (query) => {
+  const getSearchInfo = () => {
+    const query = searchRef.current.value;
     console.log('getSearchInfo --> ', query);
+    props.getSearch(query);
   };
   return (
     <ErrorBoundary>
       <div className="search-container">
-        <input type="text" ref={searchRef} onKeyUp={(event) => getSearchInfo(event.target.value)} placeholder="Search.." name="search"></input>
-        <button type="submit" onClick={() => onSearch()}><i className="fa fa-search"></i></button>
+        <input type="text" ref={searchRef} onKeyUp={() => onSearch()} placeholder="Search.." name="search"></input>
+        <button><i className="fa fa-search"></i></button>
       </div>
     </ErrorBoundary>
   );
 };
-
+Search.propTypes = {
+  getSearch: PropTypes.func
+}
 export default Search;
 

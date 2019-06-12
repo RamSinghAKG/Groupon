@@ -17,9 +17,10 @@ Project Setup steps:
 
 # Pending Enhancement:
 1) Input validation
-2) Error Handling
+2) Error Handling +  clearing message
 3) i18n 
-4) Search 
-5) Spinner for api call
-6) Use of React Hooks
+4) Spinner for api call
+5) React Hooks
+6) Performance analysis
+
 

@@ -6,6 +6,7 @@ const bookSchema = new Schema({
   author: String,
   price: Number,
   count: Number,
-  description: String,
+  description: String
 });
+bookSchema.index({name: "text", author: "text", description: "text"});
 mongoose.model('Book', bookSchema);
