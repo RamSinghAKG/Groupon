@@ -19,11 +19,11 @@ const reducer = (state = initialState, action) => {
         case actions.SET_DESCRIPTION:
             return { ...state, book: { ...state.book, description: action.payload } };
         case actions.UPDATE_BOOK_SUCCESS:
-            return { ...state, error: action.payload };
+            return { ...state, error: resetError };
         case actions.UPDATE_BOOK_FAILED:
             return { ...state, error: action.payload };
         case actions.CREATE_BOOK_SUCCESS:
-            return { ...state, book: resetBook, error: action.payload };
+            return { ...state, book: resetBook, error: resetError };
         case actions.CREATE_BOOK_FAILED:
             return { ...state, error: action.payload };
         case actions.GET_BOOK_INFO_SUCCESS:

@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { Header } from './../header/header';
 import './addbook.css';
 import * as actions from './connect/actions';
+import { ErrorBoundary } from './../errorboundary/errorboundary';
 const AddBook = (props) => {
     let isEdit = false;
     const create = () => {
@@ -32,8 +33,8 @@ const AddBook = (props) => {
 
     isEdit && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
     return (
-        <React.Fragment>
-            <Header isNormalHeader={true}></Header>
+        <ErrorBoundary>
+            <Header isNormalHeader={true} error={props.error}></Header>
             <div className="addBook-container">
                 <div key='name' className="formfield" >
                     <label htmlFor="name">Name</label>
@@ -58,7 +59,7 @@ const AddBook = (props) => {
                 <button className="action-btn" onClick={() => goBack()}>Cancel</button>
                 {createBtn}
             </div>
-        </React.Fragment>
+        </ErrorBoundary>
     );
 };
 AddBook.propTypes = {
@@ -77,7 +78,8 @@ AddBook.propTypes = {
 function mapStateToProps(state) {
     return {
         book: state.bookReducer.book,
-        bookInfoResponded: state.bookReducer.bookInfoResponded
+        bookInfoResponded: state.bookReducer.bookInfoResponded,
+        error: state.bookReducer.error.statusText
     }
 }
 function mapDispatchToProps(dispatch) {

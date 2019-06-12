@@ -5,14 +5,14 @@ const initialState = {
     error: { status: '', statusText: '' }
 };
 const reducer = (state = initialState, action) => {
-    let success =  {status: 200, statusText: 'SUCCESS'};
+    let resetError = { status: '', statusText: '' };
     switch (action.type) {
         case actions.GET_BOOKS_SUCCESS:
             let books = state.books;
             if(action.payload.offset === 0  ) {
                 books = [];
             }
-            return { ...state, books: books.concat(action.payload.books), offset:action.payload.offset, error: success };
+            return { ...state, books: books.concat(action.payload.books), offset:action.payload.offset, error: resetError };
         case actions.GET_BOOKS_FAILED:
             return { ...state, books: [], error: action.payload };
         default:

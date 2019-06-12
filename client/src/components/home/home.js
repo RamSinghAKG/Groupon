@@ -6,7 +6,8 @@ import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
 import './home.css';
 import Books from '../books/books';
-import {Header} from './../header/header';
+import { Header } from './../header/header';
+import { ErrorBoundary } from './../errorboundary/errorboundary';
 class Home extends React.Component {
   scrollRef = React.createRef();
   componentDidMount() {
@@ -21,19 +22,18 @@ class Home extends React.Component {
     return null;
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // (snapshot here is the value returned from getSnapshotBeforeUpdate)
-    // console.log('componentDidUpdate...');
     if (snapshot !== null) {
-      console.log('componentDidUpdate...');
       const list = this.scrollRef.current;
       list.scrollTop = list.scrollHeight - snapshot - 50;
     }
   }
   render() {
-    return (<React.Fragment>
-          <Header></Header>
-          <Books books={this.props.books} ref={this.scrollRef} offset = {this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
-    </React.Fragment>);
+    return (
+      <ErrorBoundary>
+        <Header error={this.props.error}></Header>
+        <Books books={this.props.books} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
+      </ErrorBoundary>
+    );
   }
 }
 Home.propTypes = {
@@ -45,7 +45,8 @@ Home.propTypes = {
 function mapStateToProps(state) {
   return {
     books: state.libraryReducer.books,
-    offset: state.libraryReducer.offset
+    offset: state.libraryReducer.offset,
+    error: state.libraryReducer.error.statusText
   }
 }
 function mapDispatchToProps(dispatch) {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './books.css';
+import { ErrorBoundary } from './../errorboundary/errorboundary';
 
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
@@ -40,7 +41,11 @@ const Books = React.forwardRef((props, ref) => {
             </div>
         );
     });
-    return (<div className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)}> {bookCollection}</div>);
+    return (
+        <ErrorBoundary>
+            <div className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)}> {bookCollection}</div>
+        </ErrorBoundary>);
+    
 });
 
 Books.propTypes = {

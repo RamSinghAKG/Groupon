@@ -23,3 +23,7 @@
   color: #4CAF50;
   font-weight: bolder;
 }
+.error-message {
+  color: red;
+  margin: 20px 0;
+}

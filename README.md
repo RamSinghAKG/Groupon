@@ -9,17 +9,17 @@ Project Setup steps:
 7) npm start //open browser http://localhost:3000
 
 
-Tasks:
+# Tasks:
 1)Setup: https://medium.freecodecamp.org/create-a-react-frontend-a-node-express-backend-and-connect-them-together-c5798926047c
 2)Added cors
 3)Added nodemon: https://www.npmjs.com/package/nodemon
 
 
-Pending Enhancement:
+# Pending Enhancement:
 1) Input validation
 2) Error Handling
 3) i18n 
 4) Search 
-5) Page not found page when server is down
-6) Spinner for api call
+5) Spinner for api call
+6) Use of React Hooks
 

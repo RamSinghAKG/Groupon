@@ -24,7 +24,7 @@ export  const fetchBooks =  (offset = 0) => async (dispatch) => {
     }catch(error){
         return dispatch({
             type: GET_BOOKS_FAILED,
-            payload: {status: '', statusText: error.message}
+            payload: {status: 'FAILED', statusText: error.message}
         });
     }
 };

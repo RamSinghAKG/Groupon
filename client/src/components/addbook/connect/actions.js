@@ -1,5 +1,4 @@
 import config from '../../../config';
-
 export const SET_NAME = "SET_NAME";
 export const SET_DESCRIPTION = "SET_DESCRIPTION";
 export const SET_COUNT = "SET_COUNT";
@@ -12,13 +11,7 @@ export const UPDATE_BOOK_FAILED = "UPDATE_BOOK_FAILED";
 export const GET_BOOK_INFO_REQUESTED = "GET_BOOK_INFO_REQUESTED";
 export const GET_BOOK_INFO_SUCCESS = "GET_BOOK_INFO_SUCCESS";
 export const GET_BOOK_INFO_FAILED = "GET_BOOK_INFO_FAILED";
-// export const RESET_BOOK = "RESET_BOOK";
 
-// const reset = (dispatch) => {
-//     return dispatch({
-//         type: RESET_BOOK
-//     });
-// }
 export const setName = (name) => (dispatch) => {
     return dispatch({
         type: SET_NAME,
@@ -76,7 +69,7 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
     }catch(error){
         return dispatch({
             type: CREATE_BOOK_FAILED,
-            payload: {status: '', statusText: error.message}
+            payload: {status: 'FAILED', statusText: error.message}
         });
     }
 };
@@ -110,7 +103,7 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
     }catch(error){
         return dispatch({
             type: UPDATE_BOOK_FAILED,
-            payload: {status: '', statusText: error.message}
+            payload: {status: 'FAILED', statusText: error.message}
         });
     }
 };
@@ -135,7 +128,7 @@ export  const fetchBookInfo =  (id) => async (dispatch) => {
     }catch(error){
         return dispatch({
             type: GET_BOOK_INFO_FAILED,
-            payload: {status: '', statusText: error.message}
+            payload: {status: 'FAILED', statusText: error.message}
         });
     }
 };
