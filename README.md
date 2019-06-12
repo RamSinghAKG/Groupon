@@ -10,17 +10,18 @@ Project Setup steps:
 
 
 # Tasks:
-1)Setup: https://medium.freecodecamp.org/create-a-react-frontend-a-node-express-backend-and-connect-them-together-c5798926047c
-2)Added cors
-3)Added nodemon: https://www.npmjs.com/package/nodemon
+1) Setup: https://medium.freecodecamp.org/create-a-react-frontend-a-node-express-backend-and-connect-them-together-c5798926047c
+2) Added cors
+3) Added nodemon: https://www.npmjs.com/package/nodemon
 
 
 # Pending Enhancement:
 1) Input validation
 2) Error Handling +  clearing message
-3) i18n 
-4) Spinner for api call
-5) React Hooks
-6) Performance analysis
+3) Search correction
+4) i18n 
+5) Spinner for api call
+6) React Hooks
+7) Performance analysis
 
 
