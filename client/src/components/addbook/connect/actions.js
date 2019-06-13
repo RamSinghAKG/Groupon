@@ -1,4 +1,5 @@
 import config from '../../../config';
+import * as commonActions from '../../common/actions'
 export const SET_NAME = "SET_NAME";
 export const SET_DESCRIPTION = "SET_DESCRIPTION";
 export const SET_COUNT = "SET_COUNT";
@@ -44,6 +45,7 @@ export const setDescription = (description) => (dispatch) => {
 }
 export  const createBook =  (bookInfo={}) => async (dispatch) => {
     try {
+        commonActions.loadingInprogress(dispatch);
         let url = config.apiserver + '/library/create';
         let options = {
             method: 'POST',
@@ -55,11 +57,13 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
         let response = await fetch(url, options);
         if(response.status === 200) {
             let booksInfo = await response.json();
+            commonActions.loadingCompleted(dispatch);
             return dispatch({
                 type: CREATE_BOOK_SUCCESS,
                 payload: booksInfo
             });
         } else {
+            commonActions.loadingCompleted(dispatch);
             return dispatch({
                 type: CREATE_BOOK_FAILED,
                 payload: {status: response.status, statusText: response.statusText}
@@ -67,6 +71,7 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
         }
         
     }catch(error){
+        commonActions.loadingCompleted(dispatch);
         return dispatch({
             type: CREATE_BOOK_FAILED,
             payload: {status: 'FAILED', statusText: error.message}
@@ -76,6 +81,7 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
 
 export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
     try {
+        commonActions.loadingInprogress(dispatch);
         let url = config.apiserver + '/library/book/update';
         let options = {
             method: 'PUT',
@@ -87,6 +93,7 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
         let response = await fetch(url, options);
         if(response.status === 200) {
             let booksInfo = await response.json();
+            commonActions.loadingCompleted(dispatch);
             history.goBack();
             return dispatch({
                 type: UPDATE_BOOK_SUCCESS,
@@ -94,6 +101,7 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
             });
 
         } else {
+            commonActions.loadingCompleted(dispatch);
             return dispatch({
                 type: UPDATE_BOOK_FAILED,
                 payload: {status: response.status, statusText: response.statusText}
@@ -101,6 +109,7 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
         }
         
     }catch(error){
+        commonActions.loadingCompleted(dispatch);
         return dispatch({
             type: UPDATE_BOOK_FAILED,
             payload: {status: 'FAILED', statusText: error.message}
@@ -109,16 +118,19 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
 };
 export  const fetchBookInfo =  (id) => async (dispatch) => {
     try {
+        commonActions.loadingInprogress(dispatch);
         let url = config.apiserver + '/library/book/'+id;
         let response = await fetch(url);
         if(response.status === 200) {
             let booksInfo = await response.json();
+            commonActions.loadingCompleted(dispatch);
             return dispatch({
                 type: GET_BOOK_INFO_SUCCESS,
                 payload: booksInfo[0]
             });
 
         } else {
+            commonActions.loadingCompleted(dispatch);
             return dispatch({
                 type: GET_BOOK_INFO_FAILED,
                 payload: {status: response.status, statusText: response.statusText}
@@ -126,12 +138,12 @@ export  const fetchBookInfo =  (id) => async (dispatch) => {
         }
         
     }catch(error){
+        commonActions.loadingCompleted(dispatch);
         return dispatch({
             type: GET_BOOK_INFO_FAILED,
             payload: {status: 'FAILED', statusText: error.message}
         });
     }
 };
-
 
 

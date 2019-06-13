@@ -7,6 +7,7 @@ import * as actions from './connect/actions';
 import './home.css';
 import Books from '../books/books';
 import { Header } from './../header/header';
+import Spinner from '../UI/spinner/spinner';
 import { ErrorBoundary } from './../errorboundary/errorboundary';
 class Home extends React.Component {
   scrollRef = React.createRef();
@@ -24,7 +25,7 @@ class Home extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (snapshot !== null) {
       const list = this.scrollRef.current;
-      list.scrollTop = list.scrollHeight - snapshot - 50;
+      list.scrollTop = list.scrollHeight - snapshot - 20;
     }
   }
   fetchBooks = (offset) => {
@@ -35,8 +36,8 @@ class Home extends React.Component {
     let filterRecords = [];
     var pattern = new RegExp(query, "gi");
     filterRecords = allBooks.filter(item => {
-      let isSearchable = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
-      if (isSearchable) { return item; }
+      const isSearchable = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
+      return isSearchable;
     });
     query.length>0 ? this.props.setFilteredBooks(filterRecords) : this.props.fetchBooks();
   }
@@ -44,6 +45,7 @@ class Home extends React.Component {
     const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
     return (
       <ErrorBoundary>
+        {this.props.isLoading ? <Spinner></Spinner> : null} 
         <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
         <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.fetchBooks}></Books>
       </ErrorBoundary>
@@ -54,7 +56,8 @@ Home.propTypes = {
   books: PropTypes.array,
   offset: PropTypes.number,
   fetchBooks: PropTypes.func,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  isLoading: PropTypes.bool
 };
 
 function mapStateToProps(state) {
@@ -63,7 +66,8 @@ function mapStateToProps(state) {
     filteredBooks: state.libraryReducer.filteredBooks,
     isSearch: state.libraryReducer.isSearch,
     offset: state.libraryReducer.offset,
-    error: state.libraryReducer.error.statusText
+    error: state.libraryReducer.error.statusText,
+    isLoading: state.commonReducer.isLoading
   }
 }
 function mapDispatchToProps(dispatch) {

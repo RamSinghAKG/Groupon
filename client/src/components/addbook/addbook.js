@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Header } from './../header/header';
+import Spinner from '../UI/spinner/spinner';
 import './addbook.css';
 import * as actions from './connect/actions';
 import { ErrorBoundary } from './../errorboundary/errorboundary';
@@ -34,6 +35,7 @@ const AddBook = (props) => {
     isEdit && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
     return (
         <ErrorBoundary>
+            {props.isLoading ? <Spinner></Spinner> : null} 
             <Header isNormalHeader={true} error={props.error}></Header>
             <div className="addBook-container">
                 <div key='name' className="formfield" >
@@ -73,13 +75,15 @@ AddBook.propTypes = {
     fetchBookInfo: PropTypes.func,
     history: PropTypes.object,
     match: PropTypes.object,
-    bookInfoRequested: PropTypes.bool
+    bookInfoResponded: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 function mapStateToProps(state) {
     return {
         book: state.bookReducer.book,
         bookInfoResponded: state.bookReducer.bookInfoResponded,
-        error: state.bookReducer.error.statusText
+        error: state.bookReducer.error.statusText,
+        isLoading: state.commonReducer.isLoading
     }
 }
 function mapDispatchToProps(dispatch) {

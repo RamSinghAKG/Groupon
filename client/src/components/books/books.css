@@ -38,6 +38,7 @@
 .scrollableSection{
     height: 500px;
     overflow: scroll;
+    padding-bottom:10px;
 }
 .norecord{
     color: blue;

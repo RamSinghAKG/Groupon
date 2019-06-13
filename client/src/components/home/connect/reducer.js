@@ -2,7 +2,7 @@ import * as actions from './actions';
 const initialState = {
     books: [],
     offset: 0,
-    isSearch: false, 
+    isSearch: false,
     filteredBooks: [],
     error: { status: '', statusText: '' }
 };
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
     let resetError = { status: '', statusText: '' };
     switch (action.type) {
         case actions.SET_FILTER_BOOKS:
-            return { ...state,  isSearch: true, filteredBooks: action.payload };
+            return { ...state, isSearch: true, filteredBooks: action.payload };
         case actions.GET_BOOKS_SUCCESS:
             let books = state.books;
             if (action.payload.offset === 0) {
@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
             }
             return { ...state, isSearch: false, books: books.concat(action.payload.books), offset: action.payload.offset, error: resetError };
         case actions.GET_BOOKS_FAILED:
-            return { ...state, books: [], error: action.payload };
+            return { ...state, books: [],  error: action.payload };
         case actions.GET_SEARCH_SUCCESS:
             return { ...state, books: [].concat(action.payload), error: resetError };
         case actions.GET_SEARCH_FAILED:

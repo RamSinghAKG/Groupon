@@ -7,7 +7,6 @@ import {printTime} from '../../util';
 import config from '../../config';
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
-    
     const scrollHandler = (event) => {
         const element = event.target;
         const percentage = (element.scrollTop /  (element.scrollHeight - element.clientHeight))*100;

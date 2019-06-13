@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './header.css';
-import Search from '../UI/search';
+import Search from '../UI/search/search';
 import { ErrorBoundary } from '../errorboundary/errorboundary';
 export const Header = (props) => {
     const customHeader = props.isNormalHeader ? '' : (
