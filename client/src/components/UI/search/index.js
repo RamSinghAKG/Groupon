@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './search.css';
 import { ErrorBoundary } from '../../errorboundary/errorboundary';
+import config from '../../../config';
 const Search = (props) => {
   const searchRef = React.createRef();
   let timerId = 0;
   const onSearch = () => {
     clearTimeout(timerId);
-    timerId = setTimeout(() => getSearchInfo(), 500);
+    timerId = setTimeout(() => getSearchInfo(), config.delay);
   };
   const getSearchInfo = () => {
     const query = searchRef.current.value;
     console.log('getSearchInfo --> ', query);
-    props.getSearch(query);
+    props.getSearch(query.trim());
   };
   return (
     <ErrorBoundary>

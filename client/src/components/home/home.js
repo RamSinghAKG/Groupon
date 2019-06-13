@@ -27,22 +27,25 @@ class Home extends React.Component {
       list.scrollTop = list.scrollHeight - snapshot - 50;
     }
   }
-  filterSearchRecord=(query)=>{
+  fetchBooks = (offset) => {
+    !this.props.isSearch && this.props.fetchBooks(offset);
+  }
+  filterSearchRecord = (query) => {
     const allBooks = this.props.books;
     let filterRecords = [];
     var pattern = new RegExp(query, "gi");
-    filterRecords = allBooks.filter((item) => {
-      let num = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
-      if(num) { return item;}
+    filterRecords = allBooks.filter(item => {
+      let isSearchable = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
+      if (isSearchable) { return item; }
     });
-    this.props.setFilteredBooks(filterRecords);
+    query.length>0 ? this.props.setFilteredBooks(filterRecords) : this.props.fetchBooks();
   }
   render() {
     const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
     return (
       <ErrorBoundary>
         <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
-        <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
+        <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.fetchBooks}></Books>
       </ErrorBoundary>
     );
   }

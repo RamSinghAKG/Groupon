@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './books.css';
 import { ErrorBoundary } from './../errorboundary/errorboundary';
 import {printTime} from '../../util';
+import config from '../../config';
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
     
@@ -17,7 +18,7 @@ const Books = React.forwardRef((props, ref) => {
     };
     const fetchBooks = () => {
         printTime();
-        timerId = setTimeout(getBooks, 500);
+        timerId = setTimeout(getBooks, config.delay);
     };
 
     const getBooks = () => {
