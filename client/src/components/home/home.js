@@ -27,11 +27,22 @@ class Home extends React.Component {
       list.scrollTop = list.scrollHeight - snapshot - 50;
     }
   }
+  filterSearchRecord=(query)=>{
+    const allBooks = this.props.books;
+    let filterRecords = [];
+    var pattern = new RegExp(query, "gi");
+    filterRecords = allBooks.filter((item) => {
+      let num = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
+      if(num) { return item;}
+    });
+    this.props.setFilteredBooks(filterRecords);
+  }
   render() {
+    const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
     return (
       <ErrorBoundary>
-        <Header getSearch={this.props.getSearch} error={this.props.error}></Header>
-        <Books books={this.props.books} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
+        <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
+        <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.props.fetchBooks}></Books>
       </ErrorBoundary>
     );
   }
@@ -46,6 +57,8 @@ Home.propTypes = {
 function mapStateToProps(state) {
   return {
     books: state.libraryReducer.books,
+    filteredBooks: state.libraryReducer.filteredBooks,
+    isSearch: state.libraryReducer.isSearch,
     offset: state.libraryReducer.offset,
     error: state.libraryReducer.error.statusText
   }
@@ -53,7 +66,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchBooks: actions.fetchBooks,
-    getSearch: actions.getSearch
+    getSearch: actions.getSearch,
+    setFilteredBooks: actions.setFilteredBooks
   }, dispatch);
 };
 
