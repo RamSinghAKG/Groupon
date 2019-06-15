@@ -1,0 +1,16 @@
+{
+  "short_name": "Gropuon",
+  "name": "Groupon shopping app",
+  "icons": [
+    {
+      "src": "images/groupon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#82b548",
+  "background_color": "#82b548"
+}
