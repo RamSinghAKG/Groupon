@@ -24,7 +24,9 @@ Project Setup steps:
 6) React Hooks
 7) Performance analysis
 
-#Https
-1.HTTPS=true npm start
+# Https
+1) HTTPS=true npm start
 
+# Robots.txt generator
+1) https://smallseotools.com/robots-txt-generator/
 
