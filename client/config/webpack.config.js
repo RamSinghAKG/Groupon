@@ -25,7 +25,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-
+const HtmlCriticalWebpackPlugin = require("html-critical-webpack-plugin");
 const postcssNormalize = require('postcss-normalize');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -540,6 +540,19 @@ module.exports = function(webpackEnv) {
           // both options are optional
           filename: 'static/css/[name].[contenthash:8].css',
           chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+        }),
+        new HtmlCriticalWebpackPlugin({
+          base: path.resolve(__dirname, '../build'),
+          src: 'index.html',
+          dest: 'index.html',
+          inline: true,
+          minify: true,
+          extract: true,
+          width: 375,
+          height: 565,
+          penthouse: {
+            blockJSRequests: false,
+          }
         }),
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
