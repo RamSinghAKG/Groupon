@@ -7,14 +7,14 @@ import { ErrorBoundary } from '../errorboundary/errorboundary';
 export const Header = (props) => {
     const customHeader = props.isNormalHeader ? '' : (
         <React.Fragment><Search getSearch={props.getSearch}></Search>
-            <Link to="/create">Add Book</Link></React.Fragment>);
+            <Link aria-label="go to add book page" to="/create">Add Book</Link></React.Fragment>);
     return (
         <ErrorBoundary>
-            <div className="header-container">
-                <Link className="logo" to="/">GROUPON</Link>
-                {customHeader}
-            </div>
-            <div className="error-message"> {props.error} </div>
+            <nav aria-label="menu items" className="header-container">
+                    <Link aria-label="go to home page" className="logo" to="/">GROUPON</Link>
+                    {customHeader}
+            </nav>
+            <div aria-label="error message" className="error-message"> {props.error} </div>
         </ErrorBoundary>
     );
 };

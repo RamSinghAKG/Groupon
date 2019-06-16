@@ -28,20 +28,20 @@ const Books = React.forwardRef((props, ref) => {
         const editLink=`/edit/${item._id}`
         return (
             <div key={index} className="book-container">
-                <div className="book-info">
-                    <div > {item.name} </div>
-                    <div > {item.author} </div>
-                    <div > Rs. {item.price} </div>
+                <div aria-label="book information" className="book-info">
+                    <div aria-label="book name"> {item.name} </div>
+                    <div aria-label="book author name"> {item.author} </div>
+                    <div aria-label="book price"> Rs. {item.price} </div>
                 </div>
-                <Link to={{pathname: editLink, isEdit: true}} className="book-edit">Edit</Link>
+                <Link aria-label="edit book detail" to={{pathname: editLink, isEdit: true}} className="book-edit">Edit</Link>
             </div>
         );
     });
-    const norecord = <h4 className="norecord">No matching books found...</h4>;
+    const norecord = <div aria-label="no records found" className="norecord">No matching books found...</div>;
     
     return (
         <ErrorBoundary>
-            <div className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)}> {props.books.length === 0 ? norecord : bookCollection} </div>
+            <div aria-label="book container" className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)} > {props.books.length === 0 ? norecord : bookCollection} </div>
         </ErrorBoundary>);
 });
 

@@ -46,8 +46,12 @@ class Home extends React.Component {
     return (
       <ErrorBoundary>
         {this.props.isLoading ? <Spinner></Spinner> : null} 
-        <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
-        <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.fetchBooks}></Books>
+        <header>
+            <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
+        </header>
+        <main>
+          <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.fetchBooks}></Books>
+        </main>
       </ErrorBoundary>
     );
   }

@@ -5,9 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { store } from './store';
 import Home from './components/home/home';
 import AddBook from './components/addbook/addbook';
+import Footer from './components/footer/footer';
 import * as serviceWorker from './serviceWorker';
 import { Route, Switch, Redirect } from 'react-router-dom';
-const app = (
+const App = (
     <Provider store={store}>
         <BrowserRouter>
             <Switch>
@@ -16,10 +17,11 @@ const app = (
                 <Route path="/" component={Home} />
                 <Redirect to="/" />
             </Switch>
+            <Footer> </Footer>
         </BrowserRouter>
     </Provider>
 );
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(App, document.getElementById('root'));
 
 serviceWorker.register();
 

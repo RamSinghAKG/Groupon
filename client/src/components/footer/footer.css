@@ -1,0 +1,9 @@
+.footer-container {
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}
+.about{
+    padding: 0 10px 10px 10px;
+    display: inline-block;
+}

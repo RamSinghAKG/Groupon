@@ -5,7 +5,7 @@ const Spinner = () => {
   return (
     <ErrorBoundary>
       <div className="spiner-container">
-          <div className="spinner"> <i className="fa fa-spinner"></i></div>
+          <div area-label="loading data" className="spinner"> <i className="fa fa-spinner"></i></div>
       </div>
       
     </ErrorBoundary>

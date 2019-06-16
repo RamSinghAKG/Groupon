@@ -27,40 +27,42 @@ const AddBook = (props) => {
         const { id } = props.match.params;
         props.fetchBookInfo(id);
     }
-    
+
     isEdit = props.location.isEdit;
-    const createBtn = isEdit ? <button className="action-btn" onClick={() => update()}>Update</button> : <button className="action-btn" onClick={() => create()}>Create</button>;
+    const createBtn = isEdit ? <button aria-label="update book" className="action-btn" onClick={() => update()}>Update</button> : <button aria-label="create book" className="action-btn" onClick={() => create()}>Create</button>;
     const isNameDisable = isEdit ? true : '';
 
     isEdit && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
     return (
         <ErrorBoundary>
-            {props.isLoading ? <Spinner></Spinner> : null} 
-            <Header isNormalHeader={true} error={props.error}></Header>
-            <div className="addBook-container">
-                <div key='name' className="formfield" >
+            {props.isLoading ? <Spinner></Spinner> : null}
+            <header>
+                <Header isNormalHeader={true} error={props.error}></Header>   
+            </header>
+            <main className="addBook-container">
+            <div key='name' className="formfield" >
                     <label htmlFor="name">Name</label>
-                    <input disabled={isNameDisable} type="text" value={props.book.name} placeholder="Enter name.." name="name" onChange={(event) => props.setName(event.target.value)}></input>
+                    <input aria-label="book name" disabled={isNameDisable} type="text" value={props.book.name} placeholder="Enter name.." name="name" onChange={(event) => props.setName(event.target.value)}></input>
                 </div>
                 <div key='price' className="formfield">
                     <label htmlFor="price">Price</label>
-                    <input type="number" value={props.book.price} placeholder="Enter price.." name="price" onChange={(event) => props.setPrice(event.target.value)}></input>
+                    <input aria-label="enter book price" type="number" value={props.book.price} placeholder="Enter price.." name="price" onChange={(event) => props.setPrice(event.target.value)}></input>
                 </div>
                 <div key='author' className="formfield">
                     <label htmlFor="author">Author</label>
-                    <input type="text" value={props.book.author} placeholder="Enter author.." name="author" onChange={(event) => props.setAuthor(event.target.value)}></input>
+                    <input aria-label="enter book author" type="text" value={props.book.author} placeholder="Enter author.." name="author" onChange={(event) => props.setAuthor(event.target.value)}></input>
                 </div>
                 <div key='desc' className="formfield">
                     <label htmlFor="description">Description</label>
-                    <textarea name="description" value={props.book.description} placeholder="Enter book description.." onChange={(event) => props.setDescription(event.target.value)}></textarea>
+                    <textarea aria-label="enter book description" name="description" value={props.book.description} placeholder="Enter book description.." onChange={(event) => props.setDescription(event.target.value)}></textarea>
                 </div>
                 <div key='count' className="formfield">
                     <label htmlFor="count">Count</label>
-                    <input type="number" value={props.book.count} placeholder="Enter count.." name="count" onChange={(event) => props.setCount(event.target.value)}></input>
+                    <input aria-label="enter book count" type="number" value={props.book.count} placeholder="Enter count.." name="count" onChange={(event) => props.setCount(event.target.value)}></input>
                 </div>
-                <button className="action-btn" onClick={() => goBack()}>Cancel</button>
+                <button aria-label="go back" className="action-btn" onClick={() => goBack()}>Cancel</button>
                 {createBtn}
-            </div>
+            </main>
         </ErrorBoundary>
     );
 };

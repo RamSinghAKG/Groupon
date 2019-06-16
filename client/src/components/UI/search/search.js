@@ -18,8 +18,8 @@ const Search = (props) => {
   return (
     <ErrorBoundary>
       <div className="search-container">
-        <input type="text" ref={searchRef} onKeyUp={() => onSearch()} placeholder="Search.." name="search"></input>
-        <button><i className="fa fa-search"></i></button>
+        <input aria-label="enter search input" type="text" ref={searchRef} onKeyUp={() => onSearch()} placeholder="Search.." name="search"></input>
+        <span className="search-icon" aria-label="search icon"><i className="fa fa-search"></i></span>
       </div>
     </ErrorBoundary>
   );

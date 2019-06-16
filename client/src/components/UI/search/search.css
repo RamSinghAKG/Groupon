@@ -11,10 +11,9 @@
     width:80%;
   }
   
- .search-container button {
+ .search-container .search-icon {
     padding: 6px 10px;
     background: #ddd;
     font-size: 17px;
     border: none;
-    cursor: pointer;
   }
