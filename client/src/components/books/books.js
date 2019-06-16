@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import {printTime} from 'src/util';
+import config from 'src/config';
 import './books.css';
-import { ErrorBoundary } from './../errorboundary/errorboundary';
-import {printTime} from '../../util';
-import config from '../../config';
 const Books = React.forwardRef((props, ref) => {
     let timerId = 0;
     const scrollHandler = (event) => {

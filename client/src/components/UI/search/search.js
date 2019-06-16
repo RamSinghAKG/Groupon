@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import config from 'src/config';
 import './search.css';
-import { ErrorBoundary } from '../../errorboundary/errorboundary';
-import config from '../../../config';
 const Search = (props) => {
   const searchRef = React.createRef();
   let timerId = 0;

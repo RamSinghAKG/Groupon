@@ -1,7 +1,6 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './footer.css';
-import { ErrorBoundary } from '../errorboundary/errorboundary';
 const Footer = (props) => {
     return (
         <ErrorBoundary>

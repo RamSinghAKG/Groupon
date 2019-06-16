@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Header } from './../header/header';
-import Spinner from '../UI/spinner/spinner';
-import './addbook.css';
+import { Header } from 'components/header/header';
+import Spinner from 'components/UI/spinner/spinner';
 import * as actions from './connect/actions';
-import { ErrorBoundary } from './../errorboundary/errorboundary';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import './addbook.css';
 const AddBook = (props) => {
     let isEdit = false;
     const create = () => {

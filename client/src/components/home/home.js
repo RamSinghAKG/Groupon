@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
+import Books from 'components/books/books';
+import { Header } from 'components/header/header';
+import Spinner from 'components/UI/spinner/spinner';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './home.css';
-import Books from '../books/books';
-import { Header } from './../header/header';
-import Spinner from '../UI/spinner/spinner';
-import { ErrorBoundary } from './../errorboundary/errorboundary';
 class Home extends React.Component {
   scrollRef = React.createRef();
   componentDidMount() {

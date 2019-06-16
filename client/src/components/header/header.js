@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Search from 'components/UI/search/search';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './header.css';
-import Search from '../UI/search/search';
-import { ErrorBoundary } from '../errorboundary/errorboundary';
 export const Header = (props) => {
     const customHeader = props.isNormalHeader ? '' : (
         <React.Fragment><Search getSearch={props.getSearch}></Search>

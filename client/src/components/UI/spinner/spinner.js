@@ -1,6 +1,6 @@
 import React from 'react';
+import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './spinner.css';
-import { ErrorBoundary } from '../../errorboundary/errorboundary';
 const Spinner = () => {
   return (
     <ErrorBoundary>

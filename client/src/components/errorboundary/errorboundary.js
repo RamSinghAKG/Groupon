@@ -1,7 +1,6 @@
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-import {Header} from './../header/header';
+import {Header} from 'components/header/header';
 import './errorboundary.css';
 export class ErrorBoundary extends React.Component {
     state = { hasError: false, error: '' };
@@ -26,6 +25,4 @@ export class ErrorBoundary extends React.Component {
   
       return this.props.children; 
     }
-  }
-  ErrorBoundary.propTypes = { 
   }
