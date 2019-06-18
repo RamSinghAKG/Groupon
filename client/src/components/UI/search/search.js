@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import config from 'src/config';
 import './search.css';
@@ -15,11 +16,12 @@ const Search = (props) => {
     console.log('getSearchInfo --> ', query);
     props.getSearch(query.trim());
   };
+  const searchIcon = <FontAwesomeIcon icon="search"></FontAwesomeIcon>
   return (
     <ErrorBoundary>
       <div className="search-container">
         <input aria-label="enter search input" type="text" ref={searchRef} onKeyUp={() => onSearch()} placeholder="Search.." name="search"></input>
-        <span className="search-icon" aria-label="search icon"><i className="fa fa-search"></i></span>
+        <span className="search-icon" aria-label="search icon">{searchIcon}</span>
       </div>
     </ErrorBoundary>
   );

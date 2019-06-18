@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
-import {printTime} from 'src/util';
+import {printTime} from 'common/util';
 import config from 'src/config';
 import './books.css';
 const Books = React.forwardRef((props, ref) => {

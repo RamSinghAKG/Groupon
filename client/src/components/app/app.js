@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { store } from 'src/store';
-import Home from 'components/Home/Home';
+import Home from 'components/home/home';
 import AddBook from 'components/addbook/addbook';
 import Footer from 'components/footer/footer';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';

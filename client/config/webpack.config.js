@@ -272,8 +272,9 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+        "src": path.resolve(appRoot, 'src'),
         "components": path.resolve(appRoot, 'src/components'),
-        "src": path.resolve(appRoot, 'src')
+        "common": path.resolve(appRoot, 'src/components/common')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -543,7 +544,7 @@ module.exports = function(webpackEnv) {
           filename: 'static/css/[name].[contenthash:8].css',
           chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
         }),
-        new HtmlCriticalWebpackPlugin({
+        isEnvProduction && new HtmlCriticalWebpackPlugin({
           base: path.resolve(__dirname, '../build'),
           src: 'index.html',
           dest: 'index.html',
@@ -553,7 +554,7 @@ module.exports = function(webpackEnv) {
           width: 375,
           height: 565,
           penthouse: {
-            blockJSRequests: false,
+            blockJSRequests: false
           }
         }),
       // Generate a manifest file which contains a mapping of all asset filenames
