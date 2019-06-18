@@ -32,7 +32,7 @@ const AddBook = (props) => {
     const createBtn = isEdit ? <button aria-label="update book" className="action-btn" onClick={() => update()}>Update</button> : <button aria-label="create book" className="action-btn" onClick={() => create()}>Create</button>;
     const isNameDisable = isEdit ? true : '';
 
-    isEdit && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
+    isEdit && !props.isLoading && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
     return (
         <ErrorBoundary>
             {props.isLoading ? <Spinner></Spinner> : null}

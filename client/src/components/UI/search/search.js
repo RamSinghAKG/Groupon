@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import config from 'src/config';
 import './search.css';
@@ -16,7 +17,7 @@ const Search = (props) => {
     console.log('getSearchInfo --> ', query);
     props.getSearch(query.trim());
   };
-  const searchIcon = <FontAwesomeIcon icon="search"></FontAwesomeIcon>
+  const searchIcon = <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
   return (
     <ErrorBoundary>
       <div className="search-container">
