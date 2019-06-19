@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Header} from 'components/header/header';
+// import {Header} from 'components/header/header';
 import './errorboundary.css';
 export class ErrorBoundary extends React.Component {
     state = { hasError: false, error: '' };
@@ -17,7 +17,6 @@ export class ErrorBoundary extends React.Component {
       if (this.state.hasError) {
         return (
         <React.Fragment>
-            <Header></Header>
             <h1> Something went wrong...</h1>
             <div className="error-message">{this.state.error}</div>
         </React.Fragment>);

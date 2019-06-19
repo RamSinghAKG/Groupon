@@ -1,5 +1,5 @@
-import config from '../../../config';
-import * as commonActions from '../../common/actions'
+import config from 'src/config';
+import * as commonActions from 'common/actions'
 export const GET_BOOKS_SUCCESS = "GET_BOOKS_SUCCESS";
 export const GET_BOOKS_FAILED = "GET_BOOKS_FAILED";
 export const GET_SEARCH_SUCCESS = "GET_SEARCH_SUCCESS";

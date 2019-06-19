@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {  useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,7 +9,11 @@ import * as actions from './connect/actions';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './addbook.css';
 const AddBook = (props) => {
-    let isEdit = false;
+    const isEdit = props.location.isEdit;
+    useEffect(() => {
+        isEdit && fetchBookInfo();
+    }, []);
+    
     const create = () => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
         isDataValid && props.createBook(props.book);
@@ -27,21 +31,20 @@ const AddBook = (props) => {
         const { id } = props.match.params;
         props.fetchBookInfo(id);
     }
-
-    isEdit = props.location.isEdit;
+    // const isEdit = props.location.isEdit;
     const createBtn = isEdit ? <button aria-label="update book" className="action-btn" onClick={() => update()}>Update</button> : <button aria-label="create book" className="action-btn" onClick={() => create()}>Create</button>;
     const isNameDisable = isEdit ? true : '';
 
-    isEdit && !props.isLoading && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
+
     console.log('render addbook ....');
     return (
         <ErrorBoundary>
             {props.isLoading ? <Spinner></Spinner> : null}
             <header>
-                <Header isNormalHeader={true} error={props.error}></Header>   
+                <Header isNormalHeader={true} error={props.error}></Header>
             </header>
             <main className="addBook-container">
-            <div key='name' className="formfield" >
+                <div key='name' className="formfield" >
                     <label htmlFor="name">Name</label>
                     <input aria-label="book name" disabled={isNameDisable} type="text" value={props.book.name} placeholder="Enter name.." name="name" onChange={(event) => props.setName(event.target.value)}></input>
                 </div>

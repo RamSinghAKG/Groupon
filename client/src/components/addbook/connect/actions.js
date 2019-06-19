@@ -1,5 +1,5 @@
 import config from '../../../config';
-import * as commonActions from '../../common/actions'
+import * as commonActions from 'common/actions'
 export const SET_NAME = "SET_NAME";
 export const SET_DESCRIPTION = "SET_DESCRIPTION";
 export const SET_COUNT = "SET_COUNT";

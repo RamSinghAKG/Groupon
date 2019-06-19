@@ -274,7 +274,7 @@ module.exports = function(webpackEnv) {
         'react-native': 'react-native-web',
         "src": path.resolve(appRoot, 'src'),
         "components": path.resolve(appRoot, 'src/components'),
-        "common": path.resolve(appRoot, 'src/components/common')
+        "common": path.resolve(appRoot, 'src/common')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
