@@ -42,6 +42,7 @@ class Home extends React.Component {
     query.length>0 ? this.props.setFilteredBooks(filterRecords) : this.props.fetchBooks();
   }
   render() {
+    console.log('render home...');
     const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
     return (
       <ErrorBoundary>

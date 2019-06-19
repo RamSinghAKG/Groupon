@@ -18,6 +18,7 @@ const Search = (props) => {
     props.getSearch(query.trim());
   };
   const searchIcon = <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+  console.log('render search...');
   return (
     <ErrorBoundary>
       <div className="search-container">

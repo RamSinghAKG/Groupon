@@ -38,7 +38,7 @@ const Books = React.forwardRef((props, ref) => {
         );
     });
     const norecord = <div aria-label="no records found" className="norecord">No matching books found...</div>;
-    
+    console.log('render books...');
     return (
         <ErrorBoundary>
             <div aria-label="book container" className="scrollableSection" ref={ref} onScroll={(event) => scrollHandler(event)} > {props.books.length === 0 ? norecord : bookCollection} </div>

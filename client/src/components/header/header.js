@@ -5,6 +5,7 @@ import Search from 'components/UI/search/search';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './header.css';
 export const Header = (props) => {
+    console.log('render header...');
     const customHeader = props.isNormalHeader ? '' : (
         <React.Fragment><Search getSearch={props.getSearch}></Search>
             <Link aria-label="go to add book page" to="/create">Add Book</Link></React.Fragment>);

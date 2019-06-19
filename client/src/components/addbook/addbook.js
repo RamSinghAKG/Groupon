@@ -33,6 +33,7 @@ const AddBook = (props) => {
     const isNameDisable = isEdit ? true : '';
 
     isEdit && !props.isLoading && !props.bookInfoResponded && setTimeout(fetchBookInfo, 0);
+    console.log('render addbook ....');
     return (
         <ErrorBoundary>
             {props.isLoading ? <Spinner></Spinner> : null}

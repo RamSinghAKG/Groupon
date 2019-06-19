@@ -6,6 +6,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './spinner.css';
 const Spinner = () => {
   const spin = <FontAwesomeIcon icon={faSpinner } size="6x" spin></FontAwesomeIcon>;
+  console.log('render spinner...');
   return (
     <ErrorBoundary>
       <div className="spiner-container">

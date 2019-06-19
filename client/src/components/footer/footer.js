@@ -2,6 +2,7 @@ import React from 'react';
 import { ErrorBoundary } from 'components/errorboundary/errorboundary';
 import './footer.css';
 const Footer = (props) => {
+    console.log('render footer..');
     return (
         <ErrorBoundary>
             <footer className="footer-container">
