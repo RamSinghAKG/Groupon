@@ -1,19 +1,25 @@
-import React, {  useEffect } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Header } from 'components/header/header';
-import Spinner from 'components/UI/spinner/spinner';
 import * as actions from './connect/actions';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './addbook.css';
 const AddBook = (props) => {
-    const isEdit = props.location.isEdit;
+    const Header = React.lazy(() => import('components/header/header'));
+    const Spinner = React.lazy(() => import('components/UI/spinner/spinner'));
+    
     useEffect(() => {
+        const isEdit = props.location.isEdit;
+        const fetchBookInfo = () => {
+            console.log('fetchBookInfo...');
+            const { id } = props.match.params;
+            props.fetchBookInfo(id);
+        }
         isEdit && fetchBookInfo();
     }, []);
-    
+
     const create = () => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
         isDataValid && props.createBook(props.book);
@@ -26,12 +32,8 @@ const AddBook = (props) => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
         isDataValid && props.updateBook(props.book, props.history);
     }
-    const fetchBookInfo = () => {
-        console.log('fetchBookInfo...');
-        const { id } = props.match.params;
-        props.fetchBookInfo(id);
-    }
-    // const isEdit = props.location.isEdit;
+
+    const isEdit = props.location.isEdit;
     const createBtn = isEdit ? <button aria-label="update book" className="action-btn" onClick={() => update()}>Update</button> : <button aria-label="create book" className="action-btn" onClick={() => create()}>Create</button>;
     const isNameDisable = isEdit ? true : '';
 
@@ -39,10 +41,20 @@ const AddBook = (props) => {
     console.log('render addbook ....');
     return (
         <ErrorBoundary>
-            {props.isLoading ? <Spinner></Spinner> : null}
-            <header>
-                <Header isNormalHeader={true} error={props.error}></Header>
-            </header>
+            {props.isLoading ? <Suspense fallback={<div>Loading...</div>}>
+                <Spinner />
+            </Suspense> : null}
+            {useMemo(
+                () => (
+                    <header>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Header isNormalHeader={true} error={props.error}></Header>
+                        </Suspense>
+                    </header>
+                ),
+                [props.error]
+            )}
+
             <main className="addBook-container">
                 <div key='name' className="formfield" >
                     <label htmlFor="name">Name</label>

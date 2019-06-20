@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
 import Books from 'components/books/books';
-import { Header } from 'components/header/header';
+import Header from 'components/header/header';
 import Spinner from 'components/UI/spinner/spinner';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './home.css';
 class Home extends React.Component {
   scrollRef = React.createRef();

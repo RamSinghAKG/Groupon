@@ -2,7 +2,7 @@
 import React from 'react';
 // import {Header} from 'components/header/header';
 import './errorboundary.css';
-export class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
     state = { hasError: false, error: '' };
   
     static getDerivedStateFromError(error) {
@@ -25,3 +25,5 @@ export class ErrorBoundary extends React.Component {
       return this.props.children; 
     }
   }
+
+  export default ErrorBoundary;

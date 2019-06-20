@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 

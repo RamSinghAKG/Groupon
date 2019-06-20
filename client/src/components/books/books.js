@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import {printTime} from 'common/util';
 import config from 'src/config';
 import './books.css';

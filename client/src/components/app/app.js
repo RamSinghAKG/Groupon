@@ -6,7 +6,7 @@ import { store } from 'src/store';
 import Home from 'components/home/home';
 import AddBook from 'components/addbook/addbook';
 import Footer from 'components/footer/footer';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './app.css';
 const App = () => {
     return (

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Search from 'components/UI/search/search';
-import { ErrorBoundary } from 'components/errorboundary/errorboundary';
+import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './header.css';
-export const Header = (props) => {
+const Header = (props) => {
     console.log('render header...');
     const customHeader = props.isNormalHeader ? '' : (
         <React.Fragment><Search getSearch={props.getSearch}></Search>
@@ -25,3 +25,5 @@ Header.propTypes = {
     error: PropTypes.string,
     getSearch: PropTypes.func
 };
+
+export default Header;
