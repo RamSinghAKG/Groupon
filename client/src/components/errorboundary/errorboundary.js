@@ -1,24 +1,20 @@
 
 import React from 'react';
-// import {Header} from 'components/header/header';
-import './errorboundary.css';
+import 'src/common/common.css';
 class ErrorBoundary extends React.Component {
     state = { hasError: false, error: '' };
   
-    static getDerivedStateFromError(error) {
-      return { hasError: true, error: error };
-    }
-  
     componentDidCatch(error, info) {
       // for logging 
+      console.log('logging error:', error);
+      this.setState({ hasError: true, error: error });
     }
   
     render() {
       if (this.state.hasError) {
         return (
         <React.Fragment>
-            <h1> Something went wrong...</h1>
-            <div className="error-message">{this.state.error}</div>
+            <div aria-label="error message" className="error-message"> Something went wrong...</div>
         </React.Fragment>);
       }
   

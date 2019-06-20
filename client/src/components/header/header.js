@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Search from 'components/UI/search/search';
 import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './header.css';
+import 'src/common/common.css';
 const Header = (props) => {
     console.log('render header...');
     const customHeader = props.isNormalHeader ? '' : (
@@ -23,7 +24,7 @@ const Header = (props) => {
 Header.propTypes = {
     isNormalHeader: PropTypes.bool,
     error: PropTypes.string,
-    getSearch: PropTypes.func
+    getSearch: PropTypes.func.isRequired
 };
 
 export default Header;

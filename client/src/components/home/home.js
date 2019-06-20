@@ -36,14 +36,14 @@ class Home extends React.Component {
     let filterRecords = [];
     var pattern = new RegExp(query, "gi");
     filterRecords = allBooks.filter(item => {
-      const isSearchable = pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
-      return isSearchable;
+       return  pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
     });
     query.length>0 ? this.props.setFilteredBooks(filterRecords) : this.props.fetchBooks();
   }
   render() {
     console.log('render home...');
     const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
+
     return (
       <ErrorBoundary>
         {this.props.isLoading ? <Spinner></Spinner> : null} 

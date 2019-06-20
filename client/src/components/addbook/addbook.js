@@ -9,16 +9,12 @@ import './addbook.css';
 const AddBook = (props) => {
     const Header = React.lazy(() => import('components/header/header'));
     const Spinner = React.lazy(() => import('components/UI/spinner/spinner'));
-    
+    const isEdit = props.location.isEdit;
+    const { id } = props.match.params;
+    const getBookInfo = props.fetchBookInfo;
     useEffect(() => {
-        const isEdit = props.location.isEdit;
-        const fetchBookInfo = () => {
-            console.log('fetchBookInfo...');
-            const { id } = props.match.params;
-            props.fetchBookInfo(id);
-        }
-        isEdit && fetchBookInfo();
-    }, []);
+        id && isEdit && getBookInfo(id);
+    }, [getBookInfo, id, isEdit]);
 
     const create = () => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
@@ -33,10 +29,8 @@ const AddBook = (props) => {
         isDataValid && props.updateBook(props.book, props.history);
     }
 
-    const isEdit = props.location.isEdit;
     const createBtn = isEdit ? <button aria-label="update book" className="action-btn" onClick={() => update()}>Update</button> : <button aria-label="create book" className="action-btn" onClick={() => create()}>Create</button>;
     const isNameDisable = isEdit ? true : '';
-
 
     console.log('render addbook ....');
     return (

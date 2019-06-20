@@ -24,7 +24,7 @@ const Books = React.forwardRef((props, ref) => {
         props.fetchBooks(props.offset+1);
     }
     
-    const bookCollection =  props.books.map((item, index) => {
+    const bookCollection =  props.books && props.books.map((item, index) => {
         const editLink=`/edit/${item._id}`
         return (
             <div key={index} className="book-container">
@@ -50,5 +50,8 @@ Books.propTypes = {
     books: PropTypes.array,
     fetchBooks: PropTypes.func
 };
+Books.defaultProps = {
+    books: []
+}
 
 export default Books;
