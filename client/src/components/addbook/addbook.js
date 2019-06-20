@@ -94,7 +94,7 @@ function mapStateToProps(state) {
     return {
         book: state.bookReducer.book,
         bookInfoResponded: state.bookReducer.bookInfoResponded,
-        error: state.bookReducer.error.statusText,
+        error: state.commonReducer.error.statusText,
         isLoading: state.commonReducer.isLoading
     }
 }

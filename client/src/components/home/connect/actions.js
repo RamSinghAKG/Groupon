@@ -24,19 +24,11 @@ export  const getSearch =  (query) => async (dispatch) => {
                 payload: books
             });
         } else {
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: GET_SEARCH_FAILED,
-                payload: {status: response.status, statusText: response.statusText}
-            });
+            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
         }
         
     }catch(error){
-        commonActions.loadingCompleted(dispatch);
-        return dispatch({
-            type: GET_SEARCH_FAILED,
-            payload: {status: 'FAILED', statusText: error.message}
-        });
+        return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 export  const fetchBooks =  (offset = 0) => async (dispatch) => {
@@ -53,19 +45,11 @@ export  const fetchBooks =  (offset = 0) => async (dispatch) => {
                 payload: {books, offset}
             });
         } else {
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: GET_BOOKS_FAILED,
-                payload: {status: response.status, statusText: response.statusText}
-            });
+            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
         }
         
     }catch(error){
-        commonActions.loadingCompleted(dispatch);
-        return dispatch({
-            type: GET_BOOKS_FAILED,
-            payload: {status: 'FAILED', statusText: error.message}
-        });
+        return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 

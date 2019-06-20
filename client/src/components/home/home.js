@@ -71,7 +71,7 @@ function mapStateToProps(state) {
     filteredBooks: state.libraryReducer.filteredBooks,
     isSearch: state.libraryReducer.isSearch,
     offset: state.libraryReducer.offset,
-    error: state.libraryReducer.error.statusText,
+    error: state.commonReducer.error.statusText,
     isLoading: state.commonReducer.isLoading
   }
 }

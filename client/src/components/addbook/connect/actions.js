@@ -63,19 +63,11 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
                 payload: booksInfo
             });
         } else {
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: CREATE_BOOK_FAILED,
-                payload: {status: response.status, statusText: response.statusText}
-            });
+            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
         }
         
     }catch(error){
-        commonActions.loadingCompleted(dispatch);
-        return dispatch({
-            type: CREATE_BOOK_FAILED,
-            payload: {status: 'FAILED', statusText: error.message}
-        });
+        return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 
@@ -101,19 +93,10 @@ export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
             });
 
         } else {
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: UPDATE_BOOK_FAILED,
-                payload: {status: response.status, statusText: response.statusText}
-            });
+            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
         }
-        
     }catch(error){
-        commonActions.loadingCompleted(dispatch);
-        return dispatch({
-            type: UPDATE_BOOK_FAILED,
-            payload: {status: 'FAILED', statusText: error.message}
-        });
+        return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 export  const fetchBookInfo =  (id) => async (dispatch) => {
@@ -130,19 +113,11 @@ export  const fetchBookInfo =  (id) => async (dispatch) => {
             });
 
         } else {
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: GET_BOOK_INFO_FAILED,
-                payload: {status: response.status, statusText: response.statusText}
-            });
+            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
         }
         
     }catch(error){
-        commonActions.loadingCompleted(dispatch);
-        return dispatch({
-            type: GET_BOOK_INFO_FAILED,
-            payload: {status: 'FAILED', statusText: error.message}
-        });
+         commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 

@@ -24,7 +24,7 @@ const Header = (props) => {
 Header.propTypes = {
     isNormalHeader: PropTypes.bool,
     error: PropTypes.string,
-    getSearch: PropTypes.func.isRequired
+    getSearch: PropTypes.func
 };
 
 export default Header;

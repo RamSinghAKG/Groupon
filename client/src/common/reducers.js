@@ -1,6 +1,7 @@
 import * as actions from './actions';
 const initialState = {
-    isLoading: false
+    isLoading: false,
+    error: { status: '', statusText: '' }
 };
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -8,6 +9,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, isLoading: true };
         case actions.LOADED:
                 return { ...state, isLoading: false };
+        case actions.FAILED:
+                return { ...state, isLoading: false, error: action.payload };
         default:
             return state;
     }
