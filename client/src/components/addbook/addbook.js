@@ -12,6 +12,10 @@ const AddBook = (props) => {
     const isEdit = props.location.isEdit;
     const { id } = props.match.params;
     const getBookInfo = props.fetchBookInfo;
+    const setDefaultState = props.resetBookInfo;
+    useEffect(()=>{
+            setDefaultState();
+    }, [setDefaultState]);
     useEffect(() => {
         id && isEdit && getBookInfo(id);
     }, [getBookInfo, id, isEdit]);
@@ -85,6 +89,7 @@ AddBook.propTypes = {
     createBook: PropTypes.func,
     updateBook: PropTypes.func,
     fetchBookInfo: PropTypes.func,
+    resetBookInfo: PropTypes.func,
     history: PropTypes.object,
     match: PropTypes.object,
     bookInfoResponded: PropTypes.bool,
@@ -106,6 +111,7 @@ function mapDispatchToProps(dispatch) {
         setCount: actions.setCount,
         setDescription: actions.setDescription,
         createBook: actions.createBook,
+        resetBookInfo: actions.resetBookInfo,
         updateBook: actions.updateBook,
         fetchBookInfo: actions.fetchBookInfo
     }, dispatch);

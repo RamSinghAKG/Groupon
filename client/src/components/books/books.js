@@ -37,7 +37,7 @@ const Books = React.forwardRef((props, ref) => {
             </div>
         );
     });
-    const norecord = <div aria-label="no records found" className="norecord">No matching books found...</div>;
+    const norecord = <div aria-label="no records found" className="norecord">No books found...</div>;
     console.log('render books...');
     return (
         <ErrorBoundary>

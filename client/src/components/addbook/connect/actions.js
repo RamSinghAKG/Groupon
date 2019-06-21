@@ -1,10 +1,11 @@
-import config from '../../../config';
-import * as commonActions from 'common/actions'
+import * as commonActions from 'common/actions';
+import * as service from 'common/service';
 export const SET_NAME = "SET_NAME";
 export const SET_DESCRIPTION = "SET_DESCRIPTION";
 export const SET_COUNT = "SET_COUNT";
 export const SET_PRICE = "SET_PRICE";
 export const SET_AUTHOR = "SET_AUTHOR";
+export const RESET_BOOK = "RESET_BOOK";
 export const CREATE_BOOK_SUCCESS = "CREATE_BOOK_SUCCESS";
 export const CREATE_BOOK_FAILED = "CREATE_BOOK_FAILED";
 export const UPDATE_BOOK_SUCCESS = "UPDATE_BOOK_SUCCESS";
@@ -43,29 +44,20 @@ export const setDescription = (description) => (dispatch) => {
         payload: description
     });
 }
+export const resetBookInfo = () => (dispatch) => {
+    return dispatch({
+        type: RESET_BOOK
+    });
+};
+
 export  const createBook =  (bookInfo={}) => async (dispatch) => {
     try {
         commonActions.loadingInprogress(dispatch);
-        let url = config.apiserver + '/library/create';
-        let options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bookInfo)
-        }
-        let response = await fetch(url, options);
-        if(response.status === 200) {
-            let booksInfo = await response.json();
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: CREATE_BOOK_SUCCESS,
-                payload: booksInfo
-            });
-        } else {
-            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
-        }
-        
+        await service.postData(service.url.createBook, bookInfo);
+        commonActions.loadingCompleted(dispatch);
+        return dispatch({
+                    type: CREATE_BOOK_SUCCESS
+                });
     }catch(error){
         return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
@@ -74,48 +66,26 @@ export  const createBook =  (bookInfo={}) => async (dispatch) => {
 export  const updateBook =  (bookInfo={}, history) => async (dispatch) => {
     try {
         commonActions.loadingInprogress(dispatch);
-        let url = config.apiserver + '/library/book/update';
-        let options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({book: bookInfo})
-        }
-        let response = await fetch(url, options);
-        if(response.status === 200) {
-            let booksInfo = await response.json();
-            commonActions.loadingCompleted(dispatch);
-            history.goBack();
-            return dispatch({
-                type: UPDATE_BOOK_SUCCESS,
-                payload: booksInfo
-            });
-
-        } else {
-            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
-        }
-    }catch(error){
+        await service.updateData(service.url.updateBook, {book: bookInfo});
+        commonActions.loadingCompleted(dispatch);
+        history.goBack();
+        return dispatch({
+                    type: UPDATE_BOOK_SUCCESS
+                });
+    } catch(error){
         return commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
 };
 export  const fetchBookInfo =  (id) => async (dispatch) => {
     try {
         commonActions.loadingInprogress(dispatch);
-        let url = config.apiserver + '/library/book/'+id;
-        let response = await fetch(url);
-        if(response.status === 200) {
-            let booksInfo = await response.json();
-            commonActions.loadingCompleted(dispatch);
-            return dispatch({
-                type: GET_BOOK_INFO_SUCCESS,
-                payload: booksInfo[0]
-            });
-
-        } else {
-            return commonActions.loadingFailed({status: response.status, statusText: response.statusText})(dispatch);
-        }
-        
+        let url = service.url.fetchBookInfo + id;
+        const booksInfo = await service.getData(url);
+        commonActions.loadingCompleted(dispatch);
+        return dispatch({
+            type: GET_BOOK_INFO_SUCCESS,
+            payload: booksInfo[0]
+        });
     }catch(error){
          commonActions.loadingFailed({status: 'FAILED', statusText: error.message})(dispatch);
     }
