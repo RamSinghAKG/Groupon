@@ -1,14 +1,13 @@
 import React from 'react';
-import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './footer.css';
-const Footer = (props) => {
+const Footer = () => {
     console.log('render footer..');
+    const footerText = `© 2019 Groupon Inc. All rights reserved.`;
     return (
-        <ErrorBoundary>
-            <footer className="footer-container">
-                    <a aria-label="go to about page" target="_blank" rel="noopener noreferrer" className="about" href="https://www.groupon.com/press/about-groupon">About Groupon</a>
-            </footer>
-        </ErrorBoundary>
+        <footer className="footer-container">
+            <img alt="groupon logo" className="footerLogo" src='/images/groupon.png'></img>
+            <label>{footerText}</label>
+        </footer>
     );
 };
 export default Footer;
