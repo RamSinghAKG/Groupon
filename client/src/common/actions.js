@@ -14,6 +14,7 @@ export const loadingCompleted = dispatch => {
 }
 
 export const loadingFailed = (error) => async (dispatch) => {
+    error.statusText =  'Error: '+ error.statusText;
     dispatch({
         type: FAILED,
         payload: error
