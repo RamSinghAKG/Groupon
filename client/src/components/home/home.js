@@ -1,61 +1,79 @@
-import React from 'react';
+import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
-import Books from 'components/books/books';
-import Header from 'components/header/header';
 import Spinner from 'components/UI/spinner/spinner';
+import Header from 'components/header/header';
 import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './home.css';
-class Home extends React.Component {
-  scrollRef = React.createRef();
-  componentDidMount() {
-    this.props.fetchBooks();
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    // Capture the scroll position so we can adjust scroll later.
-    if (prevProps.books.length < this.props.books.length) {
-      const list = this.scrollRef.current;
-      return list.scrollHeight - list.scrollTop;
-    }
-    return null;
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot !== null) {
-      const list = this.scrollRef.current;
-      list.scrollTop = list.scrollHeight - snapshot - 20;
-    }
-  }
-  fetchBooks = (offset) => {
-    !this.props.isSearch && this.props.fetchBooks(offset);
-  }
-  filterSearchRecord = (query) => {
-    const allBooks = this.props.books;
-    let filterRecords = [];
-    var pattern = new RegExp(query, "gi");
-    filterRecords = allBooks.filter(item => {
-       return  pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
-    });
-    query.length>0 ? this.props.setFilteredBooks(filterRecords) : this.props.fetchBooks();
-  }
-  render() {
-    console.log('render home...');
-    const bookCollection = this.props.isSearch ? this.props.filteredBooks : this.props.books;
+const Home = (props) => {
+  const Books = React.lazy(() => import('components/books/books'));
+  let scrollRef = useRef();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [numOfBooks, setNumOfBooks] = useState(0);
+  const getBooks = props.fetchBooks;
+  const {isSearch, error, setFilteredBooks} = props;
+  const bookCollection = isSearch ? props.filteredBooks : props.books;
+  const currentNumberOfBooks = props.books.length;
+  useEffect(() => {
+    getBooks()
+  }, [getBooks]);
 
-    return (
-      <ErrorBoundary>
-        {this.props.isLoading ? <Spinner></Spinner> : null} 
-        <header>
-            <Header getSearch={this.filterSearchRecord} error={this.props.error}></Header>
-        </header>
-        <main>
-          <Books books={bookCollection} ref={this.scrollRef} offset={this.props.offset} fetchBooks={this.fetchBooks}></Books>
-        </main>
-      </ErrorBoundary>
-    );
+  useEffect(() => {
+    const setScrollPostion = () => {
+      if (currentNumberOfBooks > numOfBooks) {
+        let list = scrollRef.current;
+        const lastItemOffset = 100;
+        list.scrollTop = scrollPosition - lastItemOffset;
+      }
+    }
+    setScrollPostion();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numOfBooks]);
+
+    
+
+  const fetchBooks = (offset) => {
+    setScrollPosition(scrollRef.current.scrollHeight);
+    setNumOfBooks(props.books.length);
+    !isSearch && props.fetchBooks(offset);
   }
+
+
+  return (
+    <ErrorBoundary>
+      {props.isLoading ? <Spinner /> : null}
+      {useMemo(
+        () => {
+          const filterSearchRecord = (query) => {
+            const allBooks = props.books;
+            let filterRecords = [];
+            var pattern = new RegExp(query, "gi");
+            filterRecords = allBooks.filter(item => {
+              return pattern.test(item.author) || pattern.test(item.name) || pattern.test(item.description);
+            });
+            query.length > 0 ? setFilteredBooks(filterRecords) : getBooks();
+          }
+          return (
+            <header>
+              <Header getSearch={filterSearchRecord} error={error}></Header>
+            </header>
+          )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [error, isSearch] )}
+      <header>
+
+      </header>
+      <main>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Books books={bookCollection} ref={scrollRef} offset={props.offset} fetchBooks={fetchBooks}></Books>
+        </Suspense>
+      </main>
+    </ErrorBoundary>
+  );
+
 }
 Home.propTypes = {
   books: PropTypes.array,

@@ -13,12 +13,11 @@ const AddBook = (props) => {
     const { id } = props.match.params;
     const getBookInfo = props.fetchBookInfo;
     const setDefaultState = props.resetBookInfo;
-    useEffect(()=>{
-            setDefaultState();
-    }, [setDefaultState]);
+   
     useEffect(() => {
+        setDefaultState();
         id && isEdit && getBookInfo(id);
-    }, [getBookInfo, id, isEdit]);
+    }, [setDefaultState, getBookInfo, id, isEdit]);
 
     const create = () => {
         var isDataValid = props.book.name.length > 0 && props.book.price > 0 && props.book.count > 0;
