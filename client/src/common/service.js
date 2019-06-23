@@ -39,9 +39,9 @@ export const getData = (url) => {
     return fetchJSON(url, options);
 
 }
-function fetchJSON(url, options){
+async function fetchJSON(url, options){
     let absoluteUrl = config.apiserver + url;
-    return fetch(absoluteUrl, options)
+    return await fetch(absoluteUrl, options)
         .then(status)
         .then(json)
         .then(function (data) {
@@ -53,7 +53,7 @@ function fetchJSON(url, options){
         });
 }
 function status(response) {
-    if (response.status >= 200 && response.status < 300) {
+    if (response.status === 200) {
         return Promise.resolve(response);
     } else {
         return Promise.reject(new Error(response));

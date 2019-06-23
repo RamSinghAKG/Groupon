@@ -17,6 +17,7 @@ const Home = (props) => {
   const {isSearch, error, setFilteredBooks} = props;
   const bookCollection = isSearch ? props.filteredBooks : props.books;
   const currentNumberOfBooks = props.books.length;
+
   useEffect(() => {
     getBooks()
   }, [getBooks]);
@@ -33,18 +34,16 @@ const Home = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numOfBooks]);
 
-    
-
   const fetchBooks = (offset) => {
     setScrollPosition(scrollRef.current.scrollHeight);
     setNumOfBooks(props.books.length);
     !isSearch && props.fetchBooks(offset);
   }
 
-
   return (
     <ErrorBoundary>
       {props.isLoading ? <Spinner /> : null}
+      <header>
       {useMemo(
         () => {
           const filterSearchRecord = (query) => {
@@ -57,14 +56,10 @@ const Home = (props) => {
             query.length > 0 ? setFilteredBooks(filterRecords) : getBooks();
           }
           return (
-            <header>
               <Header getSearch={filterSearchRecord} error={error}></Header>
-            </header>
           )
         // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [error, isSearch] )}
-      <header>
-
       </header>
       <main>
         <Suspense fallback={<div>Loading...</div>}>
