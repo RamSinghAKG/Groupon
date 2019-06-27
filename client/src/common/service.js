@@ -33,6 +33,7 @@ export const getData = (url) => {
         method: 'GET',
         mode: 'cors',
         headers: {
+            // 'Cache-Control':'max-age=3600, public', //1hr cache
             'Content-Type': 'application/json'
         }
     }
