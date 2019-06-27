@@ -24,8 +24,8 @@ const Home = (props) => {
 
   useEffect(() => {
     const setScrollPostion = () => {
-      if (currentNumberOfBooks > numOfBooks) {
-        let list = scrollRef.current;
+      let list = scrollRef.current;
+      if (list && currentNumberOfBooks > numOfBooks) {
         const lastItemOffset = 100;
         list.scrollTop = scrollPosition - lastItemOffset;
       }
