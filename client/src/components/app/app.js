@@ -15,7 +15,7 @@ const App = () => {
                 <BrowserRouter>
                     <Switch>
                         <Route path="/create" exact component={AddBook} />
-                        <Route path="/edit/:id" exact isEdit={true} component={AddBook} />
+                        <Route path="/edit/:id" exact  component={AddBook} />
                         <Route path="/" component={Home} />
                         <Redirect to="/" />
                     </Switch>

@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
+import Spinner from '@bit/ram-singh.components.spinner';
 import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './addbook.css';
 const AddBook = (props) => {
     const Header = React.lazy(() => import('components/header/header'));
-    const Spinner = React.lazy(() => import('components/UI/spinner/spinner'));
+    
     const isEdit = props.location.isEdit;
     const { id } = props.match.params;
     const getBookInfo = props.fetchBookInfo;

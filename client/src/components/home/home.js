@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from './connect/actions';
-import Spinner from 'components/UI/spinner/spinner';
+import Spinner from '@bit/ram-singh.components.spinner';
 import Header from 'components/header/header';
 import ErrorBoundary from 'components/errorboundary/errorboundary';
 import './home.css';
